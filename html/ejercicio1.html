@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Wilson Castro Garcia">
+    <title>Ejemplo tablas  1</title>
+    
+    <script src="../js/utilidades.js"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            font-size: 13px;
+            padding: 20px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <script>
+
+        function generarTag(tagName) {
+            var nuevoElemento = document.createElement(tagName);
+            return nuevoElemento;
+        }
+
+        function generarTagConTexto(tagName, contenido) {
+            var nuevoElemento = document.createElement(tagName);
+            var nodoDeTexto = document.createTextNode(contenido);
+            nuevoElemento.appendChild(nodoDeTexto);
+            return nuevoElemento;
+        }
+
+        function agregarAlBody(nodo) {
+            document.body.appendChild(nodo);
+        }
+
+        function agregarHijo(hijo, padre) {
+            padre.appendChild(hijo);
+        }
+
+        
+        var tituloPagina = generarTagConTexto("h1", "Horario del Evento (3 Dias)");
+        agregarAlBody(tituloPagina);
+
+        var tablaHorario = generarTag("table");
+        tablaHorario.setAttribute("border", "1");
+        tablaHorario.setAttribute("cellpadding", "10");
+        tablaHorario.setAttribute("cellspacing", "0");
+        tablaHorario.setAttribute("width", "100%");
+
+       
+        var trEncabezados = generarTag("tr");
+
+        var thDia      = generarTagConTexto("th", "Dia");
+        var th8a9      = generarTagConTexto("th", "8:00 - 9:00");
+        var th9a10     = generarTagConTexto("th", "9:00 - 10:00");
+        var th10a11    = generarTagConTexto("th", "10:00 - 11:00");
+        var th11a12    = generarTagConTexto("th", "11:00 - 12:00");
+        var th12a13    = generarTagConTexto("th", "12:00 - 13:00");
+        var th13a14    = generarTagConTexto("th", "13:00 - 14:00");
+        var th14a15    = generarTagConTexto("th", "14:00 - 15:00");
+
+        agregarHijo(thDia,   trEncabezados);
+        agregarHijo(th8a9,   trEncabezados);
+        agregarHijo(th9a10,  trEncabezados);
+        agregarHijo(th10a11, trEncabezados);
+        agregarHijo(th11a12, trEncabezados);
+        agregarHijo(th12a13, trEncabezados);
+        agregarHijo(th13a14, trEncabezados);
+        agregarHijo(th14a15, trEncabezados);
+        agregarHijo(trEncabezados, tablaHorario);
+
+        
+        var trLunes1 = generarTag("tr");
+
+        var tdLunes = generarTagConTexto("td", "Lunes");
+        tdLunes.setAttribute("rowspan", "2");
+
+        var tdSesionApertura = generarTagConTexto("td", "Sesión de Apertura");
+        tdSesionApertura.setAttribute("colspan", "2");
+
+        var tdDescanso1 = generarTagConTexto("td", "Descanso");
+
+        var tdCharlaA = generarTagConTexto("td", "Charla Técnica A");
+        tdCharlaA.setAttribute("colspan", "2");
+
+        var tdAlmuerzo1 = generarTagConTexto("td", "Almuerzo");
+        tdAlmuerzo1.setAttribute("rowspan", "2");
+
+        var tdTallerPractico = generarTagConTexto("td", "Taller Práctico");
+
+        agregarHijo(tdLunes,          trLunes1);
+        agregarHijo(tdSesionApertura, trLunes1);
+        agregarHijo(tdDescanso1,      trLunes1);
+        agregarHijo(tdCharlaA,        trLunes1);
+        agregarHijo(tdAlmuerzo1,      trLunes1);
+        agregarHijo(tdTallerPractico, trLunes1);
+        agregarHijo(trLunes1, tablaHorario);
+
+        // ---- LUNES - fila 2 ----
+        var trLunes2 = generarTag("tr");
+
+        var tdPanelDiscusion1 = generarTagConTexto("td", "Panel de Discusión");
+        tdPanelDiscusion1.setAttribute("colspan", "2");
+
+        var tdNetworking1 = generarTagConTexto("td", "Networking");
+
+        var tdCharlaB = generarTagConTexto("td", "Charla Técnica B");
+        tdCharlaB.setAttribute("colspan", "2");
+
+        agregarHijo(tdPanelDiscusion1, trLunes2);
+        agregarHijo(tdNetworking1,     trLunes2);
+        agregarHijo(tdCharlaB,         trLunes2);
+        agregarHijo(trLunes2, tablaHorario);
+
+        // ---- MARTES - fila 1 ----
+        var trMartes1 = generarTag("tr");
+
+        var tdMartes = generarTagConTexto("td", "Martes");
+        tdMartes.setAttribute("rowspan", "3");
+
+        var tdRegistro = generarTagConTexto("td", "Registro");
+        var tdKeynote  = generarTagConTexto("td", "Keynote");
+        var tdVaciaM1  = generarTag("td");
+
+        var tdDescanso2 = generarTagConTexto("td", "Descanso");
+
+        var tdCharlaC = generarTagConTexto("td", "Charla Técnica C");
+        tdCharlaC.setAttribute("colspan", "2");
+
+        var tdMesaRedonda = generarTagConTexto("td", "Mesa Redonda");
+
+        agregarHijo(tdMartes,     trMartes1);
+        agregarHijo(tdRegistro,   trMartes1);
+        agregarHijo(tdKeynote,    trMartes1);
+        agregarHijo(tdVaciaM1,    trMartes1);
+        agregarHijo(tdDescanso2,  trMartes1);
+        agregarHijo(tdCharlaC,    trMartes1);
+        agregarHijo(tdMesaRedonda,trMartes1);
+        agregarHijo(trMartes1, tablaHorario);
+
+        // ---- MARTES - fila 2 ----
+        var trMartes2 = generarTag("tr");
+
+        var tdTallerAvanzado = generarTagConTexto("td", "Taller Avanzado");
+        tdTallerAvanzado.setAttribute("colspan", "2");
+
+        var tdNetworking2 = generarTagConTexto("td", "Networking");
+        tdNetworking2.setAttribute("rowspan", "2");
+
+        var tdCharlaD = generarTagConTexto("td", "Charla Técnica D");
+        tdCharlaD.setAttribute("colspan", "2");
+
+        var tdExhibicion = generarTagConTexto("td", "Exhibición");
+        tdExhibicion.setAttribute("rowspan", "2");
+        tdExhibicion.setAttribute("colspan", "2");
+
+        agregarHijo(tdTallerAvanzado, trMartes2);
+        agregarHijo(tdNetworking2,    trMartes2);
+        agregarHijo(tdCharlaD,        trMartes2);
+        agregarHijo(tdExhibicion,     trMartes2);
+        agregarHijo(trMartes2, tablaHorario);
+
+        // ---- MARTES - fila 3 ----
+        var trMartes3 = generarTag("tr");
+
+        var tdCharlaE = generarTagConTexto("td", "Charla Técnica E");
+        tdCharlaE.setAttribute("colspan", "2");
+
+        var tdVaciaM3 = generarTag("td");
+        tdVaciaM3.setAttribute("colspan", "2");
+
+        agregarHijo(tdCharlaE,  trMartes3);
+        agregarHijo(tdVaciaM3,  trMartes3);
+        agregarHijo(trMartes3, tablaHorario);
+
+        // ---- MIÉRCOLES - fila 1 ----
+        var trMiercoles1 = generarTag("tr");
+
+        var tdMiercoles = generarTagConTexto("td", "Miércoles");
+        tdMiercoles.setAttribute("rowspan", "3");
+
+        var tdDesayunoNegocios = generarTagConTexto("td", "Desayuno de Negocios");
+        tdDesayunoNegocios.setAttribute("colspan", "2");
+        tdDesayunoNegocios.setAttribute("rowspan", "3");
+
+        var tdDescanso3 = generarTagConTexto("td", "Descanso");
+
+        var tdCharlaF = generarTagConTexto("td", "Charla Técnica F");
+        tdCharlaF.setAttribute("colspan", "2");
+
+        var tdAlmuerzo2 = generarTagConTexto("td", "Almuerzo");
+        tdAlmuerzo2.setAttribute("rowspan", "3");
+
+        var tdConferenciaCierre = generarTagConTexto("td", "Conferencia de Cierre");
+
+        agregarHijo(tdMiercoles,         trMiercoles1);
+        agregarHijo(tdDesayunoNegocios,  trMiercoles1);
+        agregarHijo(tdDescanso3,         trMiercoles1);
+        agregarHijo(tdCharlaF,           trMiercoles1);
+        agregarHijo(tdAlmuerzo2,         trMiercoles1);
+        agregarHijo(tdConferenciaCierre, trMiercoles1);
+        agregarHijo(trMiercoles1, tablaHorario);
+
+        // ---- MIÉRCOLES - fila 2 ----
+        var trMiercoles2 = generarTag("tr");
+
+        var tdPanelDiscusion2 = generarTagConTexto("td", "Panel de Discusión");
+
+        var tdTallerFinal = generarTagConTexto("td", "Taller Final");
+        tdTallerFinal.setAttribute("colspan", "2");
+
+        var tdNetworking3 = generarTagConTexto("td", "Networking");
+
+        agregarHijo(tdPanelDiscusion2, trMiercoles2);
+        agregarHijo(tdTallerFinal,     trMiercoles2);
+        agregarHijo(tdNetworking3,     trMiercoles2);
+        agregarHijo(trMiercoles2, tablaHorario);
+
+        // ---- MIÉRCOLES - fila 3 ----
+        var trMiercoles3 = generarTag("tr");
+
+        var tdEntregaPremios = generarTagConTexto("td", "Entrega de Premios");
+
+        var tdVaciaMW3 = generarTag("td");
+        tdVaciaMW3.setAttribute("colspan", "3");
+
+        agregarHijo(tdEntregaPremios, trMiercoles3);
+        agregarHijo(tdVaciaMW3,       trMiercoles3);
+        agregarHijo(trMiercoles3, tablaHorario);
+
+        agregarAlBody(tablaHorario);
+
+    </script>
+
+    <a href="../index.html">Volver al inicio</a>
+
+</body>
+
+</html>

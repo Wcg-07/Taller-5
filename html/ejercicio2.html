@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Wilson Castro Garcia">
+    <title>Ejemplo tablas  2</title>
+    <script src="../js/utilidades.js"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            font-size: 13px;
+            padding: 20px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table td {
+            vertical-align: top;
+        }
+
+        ul, ol {
+            padding-left: 16px;
+            margin-top: 4px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <script>
+
+        function generarTag(tagName) {
+            var nuevoElemento = document.createElement(tagName);
+            return nuevoElemento;
+        }
+
+        function generarTagConTexto(tagName, contenido) {
+            var nuevoElemento = document.createElement(tagName);
+            var nodoDeTexto = document.createTextNode(contenido);
+            nuevoElemento.appendChild(nodoDeTexto);
+            return nuevoElemento;
+        }
+
+        function generarTagImagen(src, altText) {
+            var imgTag = generarTag("img");
+            imgTag.src = src;
+            imgTag.alt = altText;
+            return imgTag;
+        }
+
+        function agregarAlBody(nodo) {
+            document.body.appendChild(nodo);
+        }
+
+        function generarTagEnlace(url, textoVisible) {
+            var tagA = generarTagConTexto("a", textoVisible);
+            tagA.href = url;
+            return tagA;
+        }
+
+        function agregarHijo(hijo, padre) {
+            padre.appendChild(hijo);
+        }
+
+        
+        agregarAlBody(generarTagConTexto("h1", "Productos y Especificaciones"));
+
+      
+        var tabla = generarTag("table");
+        tabla.setAttribute("border", "1");
+        tabla.setAttribute("cellpadding", "10");
+        tabla.setAttribute("cellspacing", "0");
+        tabla.setAttribute("width", "100%");
+
+        var trTitulos = generarTag("tr");
+        agregarHijo(generarTagConTexto("th", "Producto"),        trTitulos);
+        agregarHijo(generarTagConTexto("th", "Imagen"),          trTitulos);
+        agregarHijo(generarTagConTexto("th", "Descripción"),     trTitulos);
+        agregarHijo(generarTagConTexto("th", "Características"), trTitulos);
+        agregarHijo(generarTagConTexto("th", "Especificaciones"),trTitulos);
+        agregarHijo(trTitulos, tabla);
+
+       
+        var productos = [
+            {
+                nombre: "Smartphone X",
+                imagen: "../recursos/imagenes/xphone.webp",
+                descripcion: "El Smartphone X es un dispositivo de alta gama que ofrece lo último en tecnología móvil.",
+                puntos: [
+                    "Procesador de última generación",
+                    "Pantalla OLED de 6.5 pulgadas",
+                    "Batería de larga duración"
+                ],
+                caracteristicas: [
+                    "Cámara de 108 MP",
+                    "Reconocimiento facial",
+                    "Resistencia al agua y al polvo"
+                ],
+                specs: [
+                    ["RAM",           "8 GB"],
+                    ["Almacenamiento","256 GB"],
+                    ["SO",            "Android 11"]
+                ]
+            },
+            {
+                nombre: "Laptop Pro",
+                imagen: "../recursos/imagenes/notebook-dell-pro.webp",
+                descripcion: "La Laptop Pro es perfecta para profesionales que necesitan un equipo potente y portátil.",
+                puntos: [
+                    "Procesador Intel Core i7",
+                    "16 GB de RAM",
+                    "SSD de 512 GB"
+                ],
+                caracteristicas: [
+                    "Pantalla 4K UHD",
+                    "Teclado retroiluminado",
+                    "Batería de 10 horas"
+                ],
+                specs: [
+                    ["SSD",                   "512 GB"],
+                    ["Peso",                  "1.5 kg"],
+                    ["Duración de la batería","10 horas"]
+                ]
+            },
+            {
+                nombre: "Tablet Z",
+                imagen: "../recursos/imagenes/tabletZ.webp",
+                descripcion: "La Tablet Z es ideal para entretenimiento y productividad en movimiento.",
+                puntos: [
+                    "Pantalla de 10 pulgadas",
+                    "4 GB de RAM",
+                    "Almacenamiento de 64 GB"
+                ],
+                caracteristicas: [
+                    "Compatible con stylus",
+                    "Batería de 12 horas",
+                    "Conectividad LTE"
+                ],
+                specs: [
+                    ["RAM",         "4 GB"],
+                    ["Peso",        "500 g"],
+                    ["Conectividad","LTE, Wi-Fi"]
+                ]
+            }
+        ];
+
+        // ---- Construir filas dinámicamente ----
+        for (var p = 0; p < productos.length; p++) {
+            var prod = productos[p];
+            var trProducto = generarTag("tr");
+
+            // Columna nombre
+            agregarHijo(generarTagConTexto("td", prod.nombre), trProducto);
+
+            // Columna imagen
+            var tdImg = generarTag("td");
+            var imgProducto = generarTagImagen(prod.imagen, prod.nombre);
+            imgProducto.setAttribute("width", "100");
+            imgProducto.setAttribute("height", "100");
+            agregarHijo(imgProducto, tdImg);
+            agregarHijo(tdImg, trProducto);
+
+            // Columna descripción + lista
+            var tdDescripcion = generarTag("td");
+            agregarHijo(generarTagConTexto("p", prod.descripcion), tdDescripcion);
+            var ulPuntos = generarTag("ul");
+            for (var i = 0; i < prod.puntos.length; i++) {
+                agregarHijo(generarTagConTexto("li", prod.puntos[i]), ulPuntos);
+            }
+            agregarHijo(ulPuntos, tdDescripcion);
+            agregarHijo(tdDescripcion, trProducto);
+
+            // Columna características
+            var tdCaracteristicas = generarTag("td");
+            var olCaract = generarTag("ol");
+            for (var j = 0; j < prod.caracteristicas.length; j++) {
+                agregarHijo(generarTagConTexto("li", prod.caracteristicas[j]), olCaract);
+            }
+            agregarHijo(olCaract, tdCaracteristicas);
+            agregarHijo(tdCaracteristicas, trProducto);
+
+            // Columna especificaciones
+            var tdEspecificaciones = generarTag("td");
+            for (var k = 0; k < prod.specs.length; k++) {
+                agregarHijo(generarTagConTexto("p", prod.specs[k][0]), tdEspecificaciones);
+                agregarHijo(generarTagConTexto("p", prod.specs[k][1]), tdEspecificaciones);
+            }
+            agregarHijo(tdEspecificaciones, trProducto);
+
+            agregarHijo(trProducto, tabla);
+        }
+
+        agregarAlBody(tabla);
+
+    </script>
+
+    <a href="../index.html">Volver al inicio</a>
+
+</body>
+</html>
